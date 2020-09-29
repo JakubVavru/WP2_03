@@ -1,6 +1,6 @@
 <?php 
-$eur = filter_input(INPUT_POST, 'eur');
-$czk = 27 ;
+$amount = filter_input(INPUT_POST, 'amount');
+define('EUR_CZK', 27);
 $sub = filter_input(INPUT_POST, 'odeslat');
 $switch =  filter_input(INPUT_POST, 'switch');
 ?>
@@ -16,20 +16,20 @@ $switch =  filter_input(INPUT_POST, 'switch');
 
 <?php
 if (isset($sub)) {
-    if ($switch == 2) { ?>
-        <?= $eur ?> Eur je <?= $eur * $czk ?> Kč
+    if ($switch == 'eur_czk') { ?>
+        <?= $amount ?> Eur je <?= $amount * EUR_CZK ?> Kč
         <?php
-    } elseif ($switch == 1) { ?>
-        <?= $eur ?> Kč je <?= $eur / $czk ?> Eur
+    } elseif ($switch == 'czk_eur') { ?>
+        <?= $amount ?> Kč je <?= $amount / EUR_CZK ?> Eur
         <?php
     }
 
 
 } else { ?>
     <form action="index.php" method="post">
-Peníze: <input type="text" name="eur" id="eur"> <br>
-        CZK to EUR: <input type="radio" name="switch" value="1" id="switch"><br>
-        EUR to CZK: <input type="radio" name="switch" value="2" id="switch"><br>
+Peníze: <input type="text" name="amount" id="amount"> <br>
+        CZK to EUR: <input type="radio" name="switch" value="czk_eur" id="switch"><br>
+        EUR to CZK: <input type="radio" name="switch" value="eur_czk" id="switch"><br>
         <input type="submit" value="odeslat" name="odeslat">
     </form>
 <?php
